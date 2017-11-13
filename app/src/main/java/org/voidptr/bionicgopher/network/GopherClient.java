@@ -16,12 +16,14 @@ import java.util.ArrayList;
  */
 
 public class GopherClient {
-    public final static int GOPHER_PORT = 70;
+    private final static int GOPHER_PORT = 70;
 
-    public GopherClient() {
-
-    }
-
+    /**
+     * Fetch a gopher page and return a <code>GopherPage</code> object
+     * @param address URL of the address to fetch
+     * @return <code>GopherPage</code> object containing he contents of the page
+     * @throws IOException thrown in the case of a network error
+     */
     public GopherPage fetch(Uri address) throws IOException{
         Socket connection = new Socket(address.getHost(),
                 (address.getPort() == 0) ? address.getPort() : GOPHER_PORT);
