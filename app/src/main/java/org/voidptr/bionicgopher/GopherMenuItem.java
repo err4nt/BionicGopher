@@ -83,15 +83,24 @@ public class GopherMenuItem {
 
     public static GopherMenuItem fromLine(String line) {
         GopherMenuItem item = new GopherMenuItem();
+        String parts[] = line.substring(1).split("\t");
 
         try {
             switch (Type.forValue(line.charAt(0))) {
                 case INFORMATION:
-                    String parts[] = line.substring(1).split("\t");
                     item.setTitle(parts[0]);
+                    break;
+                case GOPHER_SUBMENU:
+                    item.setTitle(parts[0]);
+                    item.setPath(parts[1]);
+                    break;
+                case TEXT_FILE:
+                    item.setTitle(parts[0]);
+                    item.setPath(parts[1]);
                     break;
             }
 
+            item.setType(Type.forValue(line.charAt(0)));
             return item;
         } catch (IllegalArgumentException e) {
             throw new GopherParseError();

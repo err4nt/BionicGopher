@@ -23,7 +23,8 @@ public class GopherClient {
     }
 
     public GopherPage fetch(Uri address) throws IOException{
-        Socket connection = new Socket(address.getHost(), GOPHER_PORT);
+        Socket connection = new Socket(address.getHost(),
+                (address.getPort() == 0) ? address.getPort() : GOPHER_PORT);
 
         ArrayList<String> lineBuffer = new ArrayList<>();
 
